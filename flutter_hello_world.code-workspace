@@ -4,16 +4,16 @@
 			"path": "."
 		},
 		{
-			"path": "../form"
+			"path": "packages/form"
 		},
 		{
-			"path": "../core"
+			"path": "packages/core"
 		},
 		{
-			"path": "../uno_http_service"
+			"path": "packages/uno_http_service"
 		},
 		{
-			"path": "../dependencies"
+			"path": "packages/dependencies"
 		}
 	],
 	"settings": {}
