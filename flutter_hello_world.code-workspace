@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../form"
+		},
+		{
+			"path": "../core"
+		}
+	],
+	"settings": {}
+}
