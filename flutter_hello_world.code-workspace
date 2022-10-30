@@ -8,6 +8,12 @@
 		},
 		{
 			"path": "../core"
+		},
+		{
+			"path": "../uno_http_service"
+		},
+		{
+			"path": "../dependencies"
 		}
 	],
 	"settings": {}
