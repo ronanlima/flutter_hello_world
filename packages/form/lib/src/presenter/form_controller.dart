@@ -1,6 +1,13 @@
+import 'package:form/src/domain/usecases/login/login_usecase.dart';
+import 'package:form/src/domain/usecases/params/login_params.dart';
+
 class FormController {
+  final LoginUsecase _loginUsecase;
+
+  FormController(this._loginUsecase);
+
   String email = '';
-  String senha = '';
+  String password = '';
   String? emailError;
   String? senhaError;
 
@@ -19,13 +26,16 @@ class FormController {
     } else {
       senhaError = null;
     }
-    senha = value;
+    password = value;
   }
 
-  bool login() {
-    return (emailError == null &&
+  Future<bool> login() async {
+    final canLogin = emailError == null &&
         senhaError == null &&
         email.isNotEmpty &&
-        senha.isNotEmpty);
+        password.isNotEmpty;
+    if (!canLogin) return false;
+    final result = await _loginUsecase.call(LoginParams(email: this.email, password: this.password));
+    return result.fold<bool>((left) => false, (right) => true);
   }
 }
