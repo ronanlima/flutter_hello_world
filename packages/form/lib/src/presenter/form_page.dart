@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:form/src/presenter/form_controller.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -12,46 +13,17 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
-  String email = '';
-  String senha = '';
-  String? emailError;
-  String? senhaError;
+  late final FormController formController;
 
-  void onChangedEmail(String value) {
-    if (value.isEmpty) {
-      setState(() {
-        emailError = 'Digite um e-mail';
-      });
-    } else {
-      setState(() {
-        emailError = null;
-      });
-    }
-    email = value;
+  @override
+  void initState() {
+    super.initState();
+    formController = FormController();
   }
 
-  void onChangedSenha(String value) {
-    if (value.isEmpty) {
-      setState(() {
-        senhaError = 'Digite uma senha';
-      });
-    } else {
-      setState(() {
-        senhaError = null;
-      });
-    }
-    senha = value;
-  }
-
-  void login(BuildContext context) {
-    if (emailError != null ||
-        senhaError != null ||
-        email.isEmpty ||
-        senha.isEmpty) {
-      return;
-    }
+  void showIsLoggedSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Logado com sucesso')),
+      const SnackBar(content: Text('Logado com sucesso + formController')),
     );
   }
 
@@ -73,10 +45,12 @@ class _FormPageState extends State<FormPage> {
                 border: const OutlineInputBorder(),
                 hintText: 'Ex.: email@provedor.com',
                 label: const Text('E-mail'),
-                errorText: emailError,
+                errorText: formController.emailError,
                 // suffix: Icon(Icons.remove_red_eye)
               ),
-              onChanged: onChangedEmail,
+              onChanged: (value) => setState(() {
+                formController.onChangedEmail(value);
+              }),
             ),
             const SizedBox(
               height: 20,
@@ -86,9 +60,9 @@ class _FormPageState extends State<FormPage> {
                   border: const OutlineInputBorder(),
                   hintText: 'Senha',
                   label: const Text('Senha'),
-                  errorText: senhaError,
+                  errorText: formController.senhaError,
                   suffix: Icon(Icons.remove_red_eye)),
-              onChanged: onChangedSenha,
+              onChanged: (value) => setState(() => formController.onChangedSenha(value)),
               obscureText: true,
             ),
             const SizedBox(height: 20),
@@ -101,7 +75,12 @@ class _FormPageState extends State<FormPage> {
                   minimumSize: MaterialStateProperty.all(Size(
                       max(size.width * 0.1, 150), max(size.width * 0.02, 60))),
                 ),
-                onPressed: () => login(context),
+                onPressed: () {
+                  final isLogged = formController.login();
+                  if (isLogged) {
+                    showIsLoggedSnackBar();
+                  }
+                } ,
                 child: const Text('Login')),
             // Container(
             //   child: ElevatedButton(
