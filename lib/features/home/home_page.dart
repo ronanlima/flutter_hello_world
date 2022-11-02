@@ -4,6 +4,7 @@ import 'package:flutter_hello_world/features/home/pages/second_page.dart';
 import 'package:flutter_hello_world/features/home/widgets/custom_stateful_widget.dart';
 import 'package:flutter_hello_world/features/home/widgets/stateful_widget_with_global_key.dart';
 import 'package:form/form.dart';
+import 'package:poke_list/poke_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -100,7 +101,13 @@ class _HomePageState extends State<HomePage> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const FormPage()));
                 },
-                child: const Text("Go to form page"))
+                child: const Text("Go to form page")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const PokeListPage()));
+                },
+                child: const Text("Go to pokemon search")),
             // Text(
             //   '$_counter',
             //   style: Theme.of(context).textTheme.headline4,
