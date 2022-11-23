@@ -1,13 +1,7 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:poke_list/src/domain/params/search_pokemon_params.dart';
-import 'package:poke_list/src/domain/repositories/search_pokemon_repository.dart';
-import 'package:poke_list/src/domain/usecases/search_pokemon_usecase.dart';
-import 'package:poke_list/src/domain/usecases/search_pokemon_usecase_impl.dart';
-import 'package:poke_list/src/external/datasources/api_v2/search_pokemon_api_v2_datasource.dart';
-import 'package:poke_list/src/external/datasources/api_v2/search_pokemon_api_v2_mapper.dart';
-import 'package:poke_list/src/infra/datasources/search_pokemon_datasource.dart';
-import 'package:poke_list/src/infra/repositories/search_pokemon_repository_impl.dart';
-import 'package:uno_http_service/uno_http_service.dart';
+import '../domain/usecases/search_pokemon_usecase.dart';
 
 class PokeListPage extends StatefulWidget {
   const PokeListPage({Key? key}) : super(key: key);
@@ -18,24 +12,16 @@ class PokeListPage extends StatefulWidget {
 
 class _PokeListPageState extends State<PokeListPage> {
   late SearchPokemonUsecase usecase;
-  late SearchPokemonRepository repository;
-  late SearchPokemonDatasource datasource;
-  late SearchPokemonApiV2Mapper mapper;
-  late UnoHttpClient unoHttpClient;
 
   String pokemonName = '';
   String pokemonId = '';
   List<String> pokemonAbilities = [];
 
-  @override
-  void initState() {
-    mapper = SearchPokemonApiV2Mapper();
-    unoHttpClient = UnoHttpClient();
-    datasource = SearchPokemonApiV2Datasource(unoHttpClient, mapper);
-    repository = SearchPokemonRespositoryImpl(datasource);
-    usecase = SearchPokemonUsecaseImpl(repository);
-    super.initState();
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   usecase = DependencyInjectionWidget.of(context)!.get<SearchPokemonUsecase>();
+  //   super.didChangeDependencies();
+  // }
 
   void initPage() {
     usecase(const SearchPokemonParams(name: 'charmander')).then((either) {
@@ -53,6 +39,8 @@ class _PokeListPageState extends State<PokeListPage> {
 
   @override
   Widget build(BuildContext context) {
+    usecase = DependencyInjectionWidget.of(context)!.get<SearchPokemonUsecase>();
+    // final stringDependency = DependencyInjectionWidget.of(context)!.get<String>();
     initPage();
     return Scaffold(
       appBar: AppBar(),
