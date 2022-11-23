@@ -1,17 +1,18 @@
+import 'dart:developer';
+
+import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:poke_list/src/domain/errors/search_pokemon_error.dart';
 import 'package:poke_list/src/domain/params/search_pokemon_params.dart';
 import 'package:poke_list/src/domain/typedefs/search_pokemon_result.dart';
 import 'package:poke_list/src/external/datasources/api_v2/search_pokemon_api_v2_mapper.dart';
 import 'package:poke_list/src/infra/datasources/search_pokemon_datasource.dart';
-import 'package:uno_http_service/uno_http_service.dart';
-import 'dart:developer';
 
 class SearchPokemonApiV2Datasource extends SearchPokemonDatasource {
-  final UnoHttpClient unoHttpClient;
+  final HttpService httpService;
   final SearchPokemonApiV2Mapper mapper;
   
-  const SearchPokemonApiV2Datasource(this.unoHttpClient, this.mapper);
+  const SearchPokemonApiV2Datasource(this.httpService, this.mapper);
 
   @override
   SearchPokemonResult call(SearchPokemonParams params) async {
@@ -20,7 +21,7 @@ class SearchPokemonApiV2Datasource extends SearchPokemonDatasource {
     try {
       var mPath = '${baseUrl}pokemon/$pokemonName';
       log('path: $mPath');
-      final result = await unoHttpClient.get(path: mPath);
+      final result = await httpService.get(path: mPath);
       log('result: $result');
       final data = result.data;
       if (data != null) {
