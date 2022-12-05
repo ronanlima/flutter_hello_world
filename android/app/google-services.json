@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1000291661791",
+    "project_id": "flutterhelloworld-ddadd",
+    "storage_bucket": "flutterhelloworld-ddadd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000291661791:android:47408aca89b87ad4c3766a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_hello_world"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000291661791-liuf02agoh79hbreu7ifuvdle8qaap7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd09o0cPwQ-2sTayy7mTosqq8I5gVLto8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1000291661791-liuf02agoh79hbreu7ifuvdle8qaap7t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1000291661791-e9g5g245flamigakf0d3i84e1d8t5pkq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterHelloWorld"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

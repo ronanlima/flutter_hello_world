@@ -1,4 +1,4 @@
-name: dependencies
+name: firebase_analytics_service
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
@@ -8,12 +8,12 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  either_dart: ^0.2.0
-  firebase_analytics: ^10.0.1
-  firebase_core: ^2.0.0
   flutter:
     sdk: flutter
-  uno: ^1.0.1+5
+  dependencies:
+    path: ../dependencies
+  core:
+    path: ../core
 
 dev_dependencies:
   flutter_test:
